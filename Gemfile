@@ -10,8 +10,12 @@ gem 'byebug', :platform => :ruby
 gem 'ruby-debug', :platform => :jruby
 gem 'rack', '1.6.0'
 
+gem 'dotenv'
+
 gem 'mysql2', :platform => :ruby
 gem 'pg', :platform => :ruby
+
+gem 'activerecord', '~> 4.2.6'
 
 gem 'activerecord-jdbcmysql-adapter', :platform => :jruby
 gem 'activerecord-jdbcpostgresql-adapter', :platform => :jruby

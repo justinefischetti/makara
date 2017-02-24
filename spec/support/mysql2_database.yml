@@ -1,8 +1,8 @@
 test:
   adapter: 'mysql2_makara'
   database: 'makara_test'
-  username: 'root'
-  password: ''
+  username: <%= ENV['MYSQL_USER'] || 'root' %>
+  password: <%= ENV['MYSQL_PASSWORD'] %>
 
   connect_timeout: 1
   read_timeout: 1
