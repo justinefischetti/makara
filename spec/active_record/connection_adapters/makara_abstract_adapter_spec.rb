@@ -111,4 +111,13 @@ describe ActiveRecord::ConnectionAdapters::MakaraAbstractAdapter do
 
   end
 
+  let(:my_class) {
+    class MakaraTestClass < ActiveRecord::Base
+    end
+  }
+
+  it "should hijack specific ActiveRecord methods" do
+
+  end
+
 end
