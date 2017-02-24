@@ -27,7 +27,6 @@ describe 'MakaraPostgreSQLAdapter' do
   context 'with the connection established and schema loaded' do
 
     before do
-          puts config
       ActiveRecord::Base.establish_connection(config)
       load(File.dirname(__FILE__) + '/../../support/schema.rb')
       change_context
