@@ -111,15 +111,17 @@ describe ActiveRecord::ConnectionAdapters::MakaraAbstractAdapter do
 
   end
 
-  context "when hijacking ActiveRecord methods" do
+  context "when using ActiveRecord methods" do
 
     let(:config_path) { 'spec/support/postgresql_database.yml' }
-    let(:config)      { yaml_loader(config_path, 'test') }
-    let(:my_adapter)  { FakeAdapter.new(config)  }
+    let(:config)      { yaml_loader(config_path, 'test')       }
+    let(:my_adapter)  { FakeAdapter.new(config)                }
+    let(:hijacked_methods) { %w( execute select_rows exec_query transaction connection ) }
 
-    it "should hijack the ActiveRecord connection method" do
-      allow(ActiveRecord::Base).to receive(:connection).and_return( FakeConnection.new )
-      expect(my_adapter.connection).to be_instance_of(FakeConnection)
+    it "should hijack several ActiveRecord methods" do
+      hijacked_methods.each do |method|
+        expect(my_adapter.hijack_methods).to include(method.to_sym)
+      end
     end
 
   end
