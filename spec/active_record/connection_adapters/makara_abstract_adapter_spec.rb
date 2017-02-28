@@ -111,12 +111,16 @@ describe ActiveRecord::ConnectionAdapters::MakaraAbstractAdapter do
 
   end
 
-  let(:my_class) {
-    class MakaraTestClass < ActiveRecord::Base
-    end
-  }
+  context "when hijacking ActiveRecord methods" do
 
-  it "should hijack specific ActiveRecord methods" do
+    let(:config_path) { 'spec/support/postgresql_database.yml' }
+    let(:config)      { yaml_loader(config_path, 'test') }
+    let(:my_adapter)  { FakeAdapter.new(config)  }
+
+    it "should hijack the ActiveRecord connection method" do
+      allow(ActiveRecord::Base).to receive(:connection).and_return( FakeConnection.new )
+      expect(my_adapter.connection).to be_instance_of(FakeConnection)
+    end
 
   end
 

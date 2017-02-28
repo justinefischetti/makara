@@ -45,12 +45,17 @@ class FakeDatabaseAdapter < Struct.new(:config)
     true
   end
 
+  def connection
+    FakeConnection.new({})
+  end
+
 end
 
 class FakeProxy < Makara::Proxy
 
   send_to_all :ping
   hijack_method :execute
+  hijack_method :connection
 
   def connection_for(config)
     FakeConnection.new(config)
