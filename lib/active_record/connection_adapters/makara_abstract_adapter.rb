@@ -105,7 +105,7 @@ module ActiveRecord
       end
 
 
-      hijack_method :execute, :select_rows, :exec_query, :transaction
+      hijack_method :execute, :select_rows, :exec_query, :transaction, :connection
       send_to_all :connect, :reconnect!, :verify!, :clear_cache!, :reset!
 
       SQL_MASTER_MATCHERS           = [/\A\s*select.+for update\Z/i, /select.+lock in share mode\Z/i].map(&:freeze).freeze

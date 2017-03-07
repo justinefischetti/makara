@@ -2,6 +2,8 @@ require 'active_record'
 require 'makara'
 require 'timecop'
 require 'yaml'
+require 'erb'
+require 'dotenv/load'
 
 begin
   require 'byebug'
@@ -11,6 +13,13 @@ end
 begin
   require 'ruby-debug'
 rescue LoadError
+end
+
+def yaml_loader(path, spec_name=nil)
+  File.exist?(file =  File.expand_path(path))           or raise "File #{file} cannot be found!"
+  raw_config = ERB.new(File.read(file)).result.presence or raise "No configuration text found!"
+  data = YAML.load(raw_config).presence                 or raise "No configuration data found!"
+  spec_name ? data[spec_name] : data
 end
 
 RSpec.configure do |config|

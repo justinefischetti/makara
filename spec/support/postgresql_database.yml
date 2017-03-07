@@ -1,8 +1,8 @@
 test:
   adapter: 'postgresql_makara'
   database: 'makara_test'
-  username: 'root'
-  password: ''
+  username: <%= ENV['PG_USER'] || 'root' %>
+  password: <%= ENV['PG_PASS'] || '' %>
 
   makara:
     blacklist_duration: 2

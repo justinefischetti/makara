@@ -95,7 +95,6 @@ describe Makara::ConfigParser do
         {
           :name => 'themaster',
           :top_level => 'value',
-          :sticky => true,
           :blacklist_duration => 30,
           :master_ttl => 5,
           :sticky => true
@@ -105,7 +104,6 @@ describe Makara::ConfigParser do
         {
           :name => 'slave1',
           :top_level => 'value',
-          :sticky => true,
           :blacklist_duration => 30,
           :master_ttl => 5,
           :sticky => true
@@ -113,7 +111,6 @@ describe Makara::ConfigParser do
         {
           :name => 'slave2',
           :top_level => 'value',
-          :sticky => true,
           :blacklist_duration => 30,
           :master_ttl => 5,
           :sticky => true
@@ -131,7 +128,6 @@ describe Makara::ConfigParser do
         {
           :name => 'themaster',
           :top_level => 'value',
-          :sticky => true,
           :blacklist_duration => 456,
           :master_ttl => 5,
           :sticky => true
@@ -141,7 +137,6 @@ describe Makara::ConfigParser do
         {
           :name => 'slave1',
           :top_level => 'slave value',
-          :sticky => true,
           :blacklist_duration => 123,
           :master_ttl => 5,
           :sticky => true
@@ -149,7 +144,6 @@ describe Makara::ConfigParser do
         {
           :name => 'slave2',
           :top_level => 'value',
-          :sticky => true,
           :blacklist_duration => 123,
           :master_ttl => 5,
           :sticky => true

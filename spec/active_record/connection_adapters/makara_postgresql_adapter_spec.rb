@@ -3,10 +3,10 @@ require 'active_record/connection_adapters/postgresql_adapter'
 
 describe 'MakaraPostgreSQLAdapter' do
 
-  let(:db_username){ ENV['TRAVIS'] ? 'postgres' : `whoami`.chomp }
+  let(:db_username){ (ENV['TRAVIS'] && 'postgres') || ENV['PG_USER'] || `whoami`.chomp }
 
   let(:config){
-    base = YAML.load_file(File.expand_path('spec/support/postgresql_database.yml'))['test']
+    base = yaml_loader('spec/support/postgresql_database.yml', 'test')
     base['username'] = db_username
     base
   }
@@ -27,7 +27,6 @@ describe 'MakaraPostgreSQLAdapter' do
   context 'with the connection established and schema loaded' do
 
     before do
-          puts config
       ActiveRecord::Base.establish_connection(config)
       load(File.dirname(__FILE__) + '/../../support/schema.rb')
       change_context
