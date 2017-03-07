@@ -16,12 +16,9 @@ rescue LoadError
 end
 
 def yaml_loader(path, spec_name=nil)
-  file =  File.expand_path(path)
-  raise "File #{file} cannot be found!" unless File.exist?(file)
-  raw_config = ERB.new(File.read(file)).result
-  raise "No configuration text found!" if raw_config.empty?
-  data = YAML.load(raw_config)
-  raise "No configuration data found!" if data.empty?
+  File.exist?(file =  File.expand_path(path))           or raise "File #{file} cannot be found!"
+  raw_config = ERB.new(File.read(file)).result.presence or raise "No configuration text found!"
+  data = YAML.load(raw_config).presence                 or raise "No configuration data found!"
   spec_name ? data[spec_name] : data
 end
 
