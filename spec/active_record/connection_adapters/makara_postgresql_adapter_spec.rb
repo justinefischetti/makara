@@ -3,7 +3,7 @@ require 'active_record/connection_adapters/postgresql_adapter'
 
 describe 'MakaraPostgreSQLAdapter' do
 
-  let(:db_username){ ENV['TRAVIS'] ? 'postgres' : ENV['PG_USER'] || `whoami`.chomp }
+  let(:db_username){ (ENV['TRAVIS'] && 'postgres') || ENV['PG_USER'] || `whoami`.chomp }
 
   let(:config){
     base = yaml_loader('spec/support/postgresql_database.yml', 'test')

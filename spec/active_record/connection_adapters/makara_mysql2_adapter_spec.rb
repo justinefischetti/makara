@@ -3,7 +3,7 @@ require 'active_record/connection_adapters/mysql2_adapter'
 
 describe 'MakaraMysql2Adapter' do
 
-  let(:db_username){ ENV['TRAVIS'] ? 'travis' : ENV['MYSQL_USER'] || 'root' }
+  let(:db_username){ (ENV['TRAVIS'] && 'travis') || ENV['MYSQL_USER'] || 'root' }
 
   let(:config){
     base = yaml_loader('spec/support/mysql2_database.yml','test')
